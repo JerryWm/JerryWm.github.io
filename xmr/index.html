@@ -1,0 +1,97 @@
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/bootstrap-reboot.min.css">
+<link rel="stylesheet" href="css/bootstrap-grid.min.css">
+
+<script src="app/versions.js" ></script>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="js/poper.min.js" ></script>
+
+<script src="js/bootstrap.min.js" ></script>
+<!--<script src="js/bootstrap.bundle.min.js" ></script>-->
+
+<link rel="stylesheet" href="lib/highlight/styles/default.css">
+<script src="lib/highlight/highlight.pack.js" ></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+    <a class="navbar-brand" href="#">Jerry MINER~XMR~CPU</a>
+  
+	<ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex bg-dark">
+		<li class="nav-item dropdown" id="change-app-versions-cnt" >
+			<a class="nav-item nav-link dropdown-toggle mr-md-2" href="#" id="change-app-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Latest v1.2.0</a>
+			<ul id="app-versions-list" class="dropdown-menu dropdown-menu-right" aria-labelledby="change-app-versions"></ul>
+		</li>
+	</ul>
+
+	<a id="download-app" class="btn btn-outline-info" href="#">Download</a>
+	
+</nav>
+ 
+
+
+<br/>
+
+<div id="description-cnt" class="container">4%</div>
+
+</div>
+
+<script>
+
+var appVersions = window.appVersions;
+
+function loadDescription(version) {
+	let sVersion = 'v'+ version
+	let path = `app/versions/${sVersion}/description/index.html`;
+	
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+		if (this.readyState == 4 && this.status == 200) {
+		   $('#description-cnt').html(xhttp.responseText);
+		}
+	};
+	xhttp.open("GET", path, true);
+	xhttp.send();
+}
+
+appVersions.forEach((v) => {
+	let title = v.latest ? ("Latest v" + v.version) : "v" + v.version;
+	if ( v.latest ) {
+		$('#change-app-versions').attr('version', v.version);
+		$('#change-app-versions').text(title);
+		loadDescription(v.version);
+	}
+	$('#app-versions-list').append(
+		$(`<li><a class="dropdown-item" version="${v.version}" href="#"></a></li>'`).find('a').text(title).parent()
+	);
+});
+
+$(document).ready(function() {
+	$(document).on('click', '#change-app-versions-cnt > ul > li > a.dropdown-item', (e) => {
+		let _$ = $(e.target);
+		let parent = _$.closest('#change-app-versions-cnt');
+		parent.find('a.dropdown-item').removeClass('active');
+		_$.addClass('active');
+		
+		parent.find('.dropdown-toggle').text( _$.text() );
+		parent.find('.dropdown-toggle').attr('version', _$.attr('version'));
+		
+		console.log("click")
+	});
+	
+	$(document).on('click', '#download-app', () => {
+		let version = $('#change-app-versions').attr('version');
+		console.log(version)
+		
+		let sVersion = 'v'+ version
+		let path = `app/versions/${sVersion}/build/${sVersion}.zip`;
+		
+		window.open(path);
+	});
+});
+</script>
+
+</body>
