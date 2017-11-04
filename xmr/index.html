@@ -7,7 +7,14 @@
 
 <link rel="stylesheet" href="web/lib/highlight/styles/default.css">
 <script src="web/lib/highlight/highlight.pack.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
+<script>
+hljs.initHighlightingOnLoad();
+function gbInitHighlighting() {
+	$('pre code').each(function(i, block) {
+		hljs.highlightBlock(block);
+	});
+}
+</script>
 
 <body>
 
@@ -30,7 +37,9 @@
 
 <div id="description-cnt" class="container"></div>
 
-</div>
+
+
+
 
 <script>
 
@@ -44,6 +53,7 @@ function loadDescription(version) {
 	xhttp.onreadystatechange = function() {
 		if (this.readyState == 4 && this.status == 200) {
 		   $('#description-cnt').html(xhttp.responseText);
+		   gbInitHighlighting();
 		}
 	};
 	xhttp.open("GET", path, true);
