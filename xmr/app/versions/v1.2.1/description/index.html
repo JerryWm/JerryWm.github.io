@@ -1,0 +1,74 @@
+	<div class="alert alert-success" role="alert">
+	  <h6 class="alert-heading">v1.2.1</h6>
+	  <hr>
+	  <p>Optimized x64/aesni jerry worker</p>
+	</div>
+
+	<h6>Dev fee:</h6>
+	<div class="container">4%</div>
+	<br/>
+	
+	<h6>Description:</h6>
+	<div class="container">	
+		Only stratum is supported.
+		Support for aes ni, soft aes, x86, x64.
+		Also assembled xmr-stak racks for different platforms, they are also counted in the test.
+		At the first start, testing is started (a simple search of workers).
+		During testing, you need to close all applications (close all that you can close, even if the CPU is 0% in the manager), otherwise there is not much point in testing.
+	</div>
+	<br/>
+	
+	<h6>Ini settings:</h6>
+	<div class="container">
+	<pre>
+		<code class="ini">
+[system]
+; extends __auto.ini config
+; if auto-config does not exist, a test will be performed
+use_auto_config = 1
+
+[pool]
+; pool address(only stratum), example: my-pool.net:2222
+address = 
+; pool password, example: x
+password =
+
+[user]
+; you wallet address
+wallet_address =
+
+[workers]
+; you can manually specify a worker
+; example worker = x64/worker-jerry.bin
+;worker = 
+
+; the number of threads, if not specified, is inherited from the auto-config
+;count = 
+
+; forced use of aesni
+; example aesni = 1
+;aesni = 
+
+; process priority, if not specified, inherited from auto-config
+; there can be one of IDLE_PRIORITY_CLASS, NORMAL_PRIORITY_CLASS, HIGH_PRIORITY_CLASS, REALTIME_PRIORITY_CLASS
+; example process_priority = REALTIME_PRIORITY_CLASS
+; for REALTIME_PRIORITY_CLASS you need administrator rights
+;process_priority = REALTIME_PRIORITY_CLASS
+
+[workers_all]
+; thread priority, if not specified, inherited from auto-config
+; there can be one of THREAD_PRIORITY_LOWEST, THREAD_PRIORITY_BELOW_NORMAL, THREAD_PRIORITY_NORMAL, THREAD_PRIORITY_HIGHEST, THREAD_PRIORITY_ABOVE_NORMAL
+;thread_priority = THREAD_PRIORITY_HIGHEST	
+
+
+; specific thread [worker_0,1,2,3, .. 31]
+[worker_0]
+; priority of a particular thread
+;thread_priority = THREAD_PRIORITY_LOWEST
+
+; linking a thread to a process thread
+; there can be one of auto,0,1,2,3,...31
+;bind_cpu = 0
+		</code>
+	</pre>
+	</div>	
