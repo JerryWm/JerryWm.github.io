@@ -45,9 +45,13 @@ function gbInitHighlighting() {
 
 var appVersions = window.appVersions;
 
-function loadDescription(version) {
-	let sVersion = 'v'+ version
+function loadDescription(v) {
+	let sVersion = 'v'+ v.version;
 	let path = `app/versions/${sVersion}/description/index.html`;
+	
+	if ( v.description ) {
+		path = `app/versions/${v.description}`;
+	}
 	
 	var xhttp = new XMLHttpRequest();
 	xhttp.onreadystatechange = function() {
@@ -60,15 +64,15 @@ function loadDescription(version) {
 	xhttp.send();
 }
 
-appVersions.forEach((v) => {
+appVersions.forEach((v, i) => {
 	let title = v.latest ? ("Latest v" + v.version) : "v" + v.version;
 	if ( v.latest ) {
 		$('#change-app-versions').attr('version', v.version);
 		$('#change-app-versions').text(title);
-		loadDescription(v.version);
+		loadDescription(v);
 	}
 	$('#app-versions-list').append(
-		$(`<li><a class="dropdown-item" version="${v.version}" href="#"></a></li>'`).find('a').text(title).parent()
+		$(`<li><a class="dropdown-item" aid="${i}" version="${v.version}" href="#"></a></li>'`).find('a').text(title).parent()
 	);
 });
 
@@ -78,6 +82,11 @@ $(document).ready(function() {
 		let parent = _$.closest('#change-app-versions-cnt');
 		parent.find('a.dropdown-item').removeClass('active');
 		_$.addClass('active');
+		
+		let id = _$.attr('aid');
+		if ( window.appVersions[id] ) {
+			loadDescription(window.appVersions[id]);
+		}
 		
 		parent.find('.dropdown-toggle').text( _$.text() );
 		parent.find('.dropdown-toggle').attr('version', _$.attr('version'));
