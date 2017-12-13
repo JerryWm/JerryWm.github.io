@@ -1,0 +1,55 @@
+	<div class="alert alert-success" role="alert">
+	  
+	  <h6 class="alert-heading">v1.2.2</h6>
+	  <hr>
+	  <p>...</p>
+	  
+	  <h6 class="alert-heading">v1.2.2</h6>
+	  <hr>
+	  <p>The process priority is fixed.</p>
+	  <p>Added optimized workers.</p>
+	  <p>Fixed connection to nisehash.</p>
+	  
+	  <h6 class="alert-heading">v1.2.1</h6>
+	  <hr>
+	  <p>Optimized x64/aesni jerry worker</p>
+	  
+	</div>
+
+	<h6>Dev fee:</h6>
+	<div class="container">4%</div>
+	<br/>
+	
+	<h6>Description:</h6>
+	<div class="container">	
+		Only stratum is supported.
+		Support for aes ni, soft aes, x86, x64.
+		Also assembled xmr-stak racks for different platforms, they are also counted in the test.
+		At the first start, testing is started (a simple search of workers).
+		During testing, you need to close all applications (close all that you can close, even if the CPU is 0% in the manager), otherwise there is not much point in testing.
+	</div>
+	<br/>
+	
+	
+	<h6>Json user settings:</h6>
+	<div class="container">
+	<pre>
+		<code class="json">
+{
+	"pools": [
+		{
+			"pool_address": "pool_host:pool_port",
+			"pool_password": "{{STRING_RANDOM_8}}.my_mail@email.com",
+			"wallet_address": "my_wallet_addr"
+		}
+	],
+	
+	"overload": {
+		"process_priority": "NORMAL_PRIORITY_CLASS",
+		"thread_priority": "THREAD_PRIORITY_NORMAL"
+	}
+}
+		</code>
+	</pre>
+	</div>	
+	
