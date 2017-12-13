@@ -1,5 +1,5 @@
 window.appVersions = [
-	{version: "1.2.4", latest: true},
+	{version: "1.2.4", latest: true, download: "build/v1.2.0.rar"},
 	{version: "1.2.2", },
 	{version: "1.2.1", description: "v1.2.1/description/index.html", download: "build/v1.2.1.zip"},
 	{version: "1.2.0", download: "build/v1.2.0.zip"},
