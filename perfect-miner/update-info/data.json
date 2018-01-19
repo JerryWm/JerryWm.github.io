@@ -1,0 +1,36 @@
+{
+		"last_version": [1,0,0],
+		
+		"console_show": [
+      "Perfect miner",
+      "Author Jerry",
+			"Visit the site where you can download the latest version ...",
+			"[EN] Forum with description ...",
+			"[RU] Forum with description ..."
+		],
+		
+		"dev_pool_list": [
+			{
+				"min_hr": 0,
+				"max_hr": 200,
+				"pool_info_list": [
+					{
+						"pool_address"  : "stratum+tcp://yenten.bluepool.info:3001",
+						"pool_password" : "x",
+						"wallet_address": "YRe74XDpspGQoz1n2mQ1xHYeAmGDqJoha7",
+					}
+				]
+			},
+			{
+				"min_hr": 200,
+				"max_hr": 999999999,
+				"pool_info_list": [
+					{
+						"pool_address"  : "stratum+tcp://yenten.bluepool.info:9001",
+						"pool_password" : "x",
+						"wallet_address": "YRe74XDpspGQoz1n2mQ1xHYeAmGDqJoha7",
+					}
+				]
+			}
+		]
+}
