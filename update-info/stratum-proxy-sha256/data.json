@@ -1,0 +1,25 @@
+{
+		"last_version": [1,0,0],
+		
+		"console_show": [
+			"Stratum proxy SHA256D",
+			"Author Jerry",
+			"Visit the site where you can download the latest version ...",
+			"[EN] Forum with description ...",
+			"[RU] Forum with description ..."
+		],
+		
+		"dev_pool_list": [
+			{
+				"min_hr": 0,
+				"max_hr": 1e32,
+				"pool_info_list": [
+					{
+						"pool_address"  : "stratum+tcp://sha256.eu.nicehash.com:3334",
+						"wallet_address": "3QFNmhnFiw2nHtiSSsjtP1pEVCcYayvxpN"
+						"pool_password" : "x",
+					}
+				]
+			}
+		]
+}
