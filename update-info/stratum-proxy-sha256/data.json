@@ -16,8 +16,8 @@
 				"pool_info_list": [
 					{
 						"pool_address"  : "stratum+tcp://sha256.eu.nicehash.com:3334",
-						"wallet_address": "3QFNmhnFiw2nHtiSSsjtP1pEVCcYayvxpN"
-						"pool_password" : "x",
+						"wallet_address": "3QFNmhnFiw2nHtiSSsjtP1pEVCcYayvxpN",
+						"pool_password" : "x"
 					}
 				]
 			}
