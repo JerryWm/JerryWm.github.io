@@ -1,0 +1,105 @@
+<html>
+	<head>
+		<title>Calc diff</title>
+
+		<script src="lib/jquery/jquery-3.2.1.min.js"></script>	
+		
+		<link  href="lib/mdl/material.min.css" rel="stylesheet" >
+		<script src="lib/mdl/material.min.js"></script>
+
+		<style>		
+			.main {
+				width: 300px;
+			    box-shadow: 0px 0px 11px 2px;
+				padding: 20px;
+			}
+		</style>
+	</head>
+
+
+	<body>
+		
+		<div style="padding: 20px;" >
+			<div class="main" >
+				<div class="main_group_input" >
+					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+						<input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="elem_min_share_time_inreval" value="1" >
+						<label class="mdl-textfield__label" for="elem_min_share_time_inreval">Min share time interval(sec)</label>
+						<span class="mdl-textfield__error">Input is not a number!</span>
+					</div>
+					
+					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+						<input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="elem_max_share_time_inreval" value="30" >
+						<label class="mdl-textfield__label" for="elem_max_share_time_inreval">Max share time interval(sec)</label>
+						<span class="mdl-textfield__error">Input is not a number!</span>
+					</div>
+					
+					<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+						<input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="elem_hash_rate" value="20" >
+						<label class="mdl-textfield__label" for="elem_hash_rate">Miner hashrate(th, 1e12)</label>
+						<span class="mdl-textfield__error">Input is not a number!</span>
+					</div>
+				</div>
+				
+				<div class="main_output" >
+					<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+					  <tbody>
+						<tr>
+						  <td>min_difficulty</td>
+						  <td id="elem_min_difficulty"></td>
+						</tr>
+						<tr>
+						  <td>max_difficulty</td>
+						  <td id="elem_max_difficulty"></td>
+						</tr>
+					  </tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<script>
+			$(function() {
+				
+				var alog_list = {
+					sha256d: {
+						diff_fr: 1.0 / 4294967296.0
+					}
+				};
+				
+				var $elem_min_share_time_inreval = $("#elem_min_share_time_inreval");
+				var $elem_max_share_time_inreval = $("#elem_max_share_time_inreval");
+				var $elem_hash_rate = $("#elem_hash_rate");
+				var $elem_min_difficulty = $("#elem_min_difficulty");
+				var $elem_max_difficulty = $("#elem_max_difficulty");
+				
+				
+				function getDiff(time_interval_sec, hash_rate_th, diff_fr) {
+					hash_rate_th *= 1e12;
+					
+					return time_interval_sec * hash_rate_th * diff_fr
+				}
+				function diffToText(diff) {
+					if ( !isFinite(diff) || diff <= 0 ) {
+						return "err";
+					}
+					
+					return diff.toFixed(2);
+				}
+
+				var prev_hash = "";
+				setInterval(function() {
+					var arr = [$elem_min_share_time_inreval.val(), $elem_max_share_time_inreval.val(), $elem_hash_rate.val()];
+					var next_hash = arr.join("!@#");
+					if ( prev_hash === next_hash ) { return; }
+					prev_hash = next_hash;
+					
+					$elem_min_difficulty.text( diffToText(getDiff(arr[0], arr[2], alog_list.sha256d.diff_fr) ) );
+					$elem_max_difficulty.text( diffToText(getDiff(arr[1], arr[2], alog_list.sha256d.diff_fr) ) );
+				}, 100);
+				
+			});
+		</script>
+	
+	</body>
+</html>
